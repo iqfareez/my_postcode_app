@@ -35,15 +35,19 @@ class _AppState extends State<App> {
   ];
   Future<List<PostcodeModel>>? loadDataFromAssets(
       String state, String postcode) async {
+    // read csv from assets
     var csvString =
         await rootBundle.loadString("assets/postcode/postcode_${state}_my.csv");
     var csvList = const CsvToListConverter().convert(csvString);
-    csvList.removeAt(0);
+    csvList.removeAt(0); // remove csv header
 
     var list = <PostcodeModel>[];
     for (var item in csvList) {
       list.add(PostcodeModel.fromList(item));
     }
+
+    // search for certain postcode
+    // remove the unrelated
     if (postcode.length == 5) {
       list.removeWhere((element) => element.postcode != int.parse(postcode));
     }
@@ -110,22 +114,28 @@ class _AppState extends State<App> {
           )),
           Expanded(
             flex: 4,
-            child: FutureBuilder<List<PostcodeModel>>(
-              future: loadDataFromAssets(
-                  _selectedState ?? "Selangor", _postcodeInputController.text),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Text("Please wait");
-                }
+            child: Builder(builder: (_) {
+              if (_selectedState != null) {
+                return FutureBuilder<List<PostcodeModel>>(
+                  future: loadDataFromAssets(
+                      _selectedState!, _postcodeInputController.text),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text("One moment please...");
+                    }
 
-                if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                }
+                    if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    }
 
-                return SingleChildScrollView(
-                    child: DatatableView(snapshot.data!));
-              },
-            ),
+                    return SingleChildScrollView(
+                        child: DatatableView(snapshot.data!));
+                  },
+                );
+              } else {
+                return const Text("Select state to begin");
+              }
+            }),
           ),
         ],
       ),

@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": "build/web",
+    "site": "my-postcode",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
