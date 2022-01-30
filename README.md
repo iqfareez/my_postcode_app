@@ -1,6 +1,8 @@
+[![style: lint](https://img.shields.io/badge/style-flutter__lint-4BC0F5.svg)](https://pub.dev/packages/flutter_lints)
+
 # Malaysia Postcode App
 
-Search your postcode
+View and search your postcode
 
 ## Sources
 

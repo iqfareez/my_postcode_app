@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:my_postcode_app/my_table_data.dart';
 
 import 'model/postcode_model.dart';
+import 'my_table_data.dart';
 
 class DatatableView extends StatefulWidget {
   const DatatableView(this.postcodeDatas, {Key? key}) : super(key: key);
@@ -16,6 +15,7 @@ class _DatatableViewState extends State<DatatableView> {
   @override
   Widget build(BuildContext context) {
     return PaginatedDataTable(
+      columnSpacing: 16,
       columns: const [
         DataColumn(label: Text("No.")),
         DataColumn(

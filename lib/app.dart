@@ -1,8 +1,9 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_postcode_app/datatable_view.dart';
-import 'package:my_postcode_app/model/postcode_model.dart';
+
+import 'datatable_view.dart';
+import 'model/postcode_model.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -70,8 +71,7 @@ class _AppState extends State<App> {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.ideographic,
               children: [
-                SizedBox(
-                  width: 90,
+                Flexible(
                   child: TextField(
                     controller: _postcodeInputController,
                     maxLength: 5,
@@ -84,6 +84,7 @@ class _AppState extends State<App> {
                 ),
                 const SizedBox(width: 10),
                 Flexible(
+                  flex: 2,
                   child: DropdownButton<String>(
                     value: _selectedState,
                     hint: const Text("Select state"),

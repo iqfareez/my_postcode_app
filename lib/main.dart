@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_postcode_app/app.dart';
+
+import 'app.dart';
 
 void main() {
   runApp(const MyApp());
