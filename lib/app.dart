@@ -71,7 +71,7 @@ class _AppState extends State<App> {
               textBaseline: TextBaseline.ideographic,
               children: [
                 SizedBox(
-                  width: 130,
+                  width: 90,
                   child: TextField(
                     controller: _postcodeInputController,
                     maxLength: 5,
@@ -103,10 +103,7 @@ class _AppState extends State<App> {
                     child: ElevatedButton(
                   child: const Text("Go"),
                   onPressed: () {
-                    setState(() {
-                      print(_selectedState);
-                      print(_postcodeInputController.text);
-                    });
+                    setState(() {});
                   },
                 ))
               ],
@@ -121,7 +118,16 @@ class _AppState extends State<App> {
                       _selectedState!, _postcodeInputController.text),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text("One moment please...");
+                      return Column(
+                        children: const [
+                          Text("One moment please..."),
+                          SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: CircularProgressIndicator(),
+                          )
+                        ],
+                      );
                     }
 
                     if (snapshot.hasError) {
