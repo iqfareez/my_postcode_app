@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iqfareez.my_postcode_app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="my_postcode_app"
+        android:label="Malaysia Postcodes"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

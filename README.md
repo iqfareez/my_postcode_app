@@ -4,6 +4,11 @@
 
 View and search your postcode
 
+## Download it or access it via:
+
+- https://play.google.com/store/apps/details?id=com.iqfareez.my_postcode_app
+- https://my-postcode.web.app
+
 ## Sources
 
 https://github.com/atqnp/postcode-malaysia (Data from POS Malaysia)

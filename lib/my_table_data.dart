@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_postcode_app/model/postcode_model.dart';
+
+import 'model/postcode_model.dart';
 
 class MyTableData extends DataTableSource {
   late final List<PostcodeModel> _postcodeData;
