@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
+import 'database/db.dart';
+import 'views/home.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  DB.instance.init();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Postcode Malaysia',
-      debugShowCheckedModeBanner: false,
+      title: 'Malaysia Postcode Finder',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 240, 17, 17)),
+        fontFamily: 'Roboto',
       ),
-      darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.system,
-      home: const App(),
+      home: Home(),
     );
   }
 }
