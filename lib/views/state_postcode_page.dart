@@ -48,7 +48,7 @@ class _StatePostcodePageState extends State<StatePostcodePage> {
           final postcodes = snapshot.data!;
 
           // Group postcodes by code
-          final Map<int, List<PostcodeItem>> groupedPostcodes = {};
+          final Map<String, List<PostcodeItem>> groupedPostcodes = {};
           for (final postcode in postcodes) {
             if (!groupedPostcodes.containsKey(postcode.code)) {
               groupedPostcodes[postcode.code] = [];
@@ -56,7 +56,8 @@ class _StatePostcodePageState extends State<StatePostcodePage> {
             groupedPostcodes[postcode.code]!.add(postcode);
           }
 
-          final sortedKeys = groupedPostcodes.keys.toList()..sort();
+          final sortedKeys = groupedPostcodes.keys.toList()
+            ..sort((a, b) => int.parse(a).compareTo(int.parse(b)));
 
           return ListView.builder(
             itemCount: sortedKeys.length,
@@ -66,7 +67,7 @@ class _StatePostcodePageState extends State<StatePostcodePage> {
 
               return ExpansionTile(
                 title: Text(
-                  postcodeCode.toString().padLeft(5, '0'),
+                  postcodeCode.padLeft(5, '0'),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(

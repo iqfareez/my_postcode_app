@@ -11,9 +11,9 @@ class $PostcodeItemsTable extends PostcodeItems
   $PostcodeItemsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _codeMeta = const VerificationMeta('code');
   @override
-  late final GeneratedColumn<int> code = GeneratedColumn<int>(
+  late final GeneratedColumn<String> code = GeneratedColumn<String>(
       'postcode', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _areaNameMeta =
       const VerificationMeta('areaName');
   @override
@@ -80,7 +80,7 @@ class $PostcodeItemsTable extends PostcodeItems
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return PostcodeItem(
       code: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}postcode'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}postcode'])!,
       areaName: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}area_name'])!,
       postOffice: attachedDatabase.typeMapping
@@ -97,7 +97,7 @@ class $PostcodeItemsTable extends PostcodeItems
 }
 
 class PostcodeItem extends DataClass implements Insertable<PostcodeItem> {
-  final int code;
+  final String code;
   final String areaName;
   final String postOffice;
   final String stateCode;
@@ -109,7 +109,7 @@ class PostcodeItem extends DataClass implements Insertable<PostcodeItem> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['postcode'] = Variable<int>(code);
+    map['postcode'] = Variable<String>(code);
     map['area_name'] = Variable<String>(areaName);
     map['post_office'] = Variable<String>(postOffice);
     map['state_code'] = Variable<String>(stateCode);
@@ -129,7 +129,7 @@ class PostcodeItem extends DataClass implements Insertable<PostcodeItem> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PostcodeItem(
-      code: serializer.fromJson<int>(json['code']),
+      code: serializer.fromJson<String>(json['code']),
       areaName: serializer.fromJson<String>(json['areaName']),
       postOffice: serializer.fromJson<String>(json['postOffice']),
       stateCode: serializer.fromJson<String>(json['stateCode']),
@@ -139,7 +139,7 @@ class PostcodeItem extends DataClass implements Insertable<PostcodeItem> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'code': serializer.toJson<int>(code),
+      'code': serializer.toJson<String>(code),
       'areaName': serializer.toJson<String>(areaName),
       'postOffice': serializer.toJson<String>(postOffice),
       'stateCode': serializer.toJson<String>(stateCode),
@@ -147,7 +147,7 @@ class PostcodeItem extends DataClass implements Insertable<PostcodeItem> {
   }
 
   PostcodeItem copyWith(
-          {int? code,
+          {String? code,
           String? areaName,
           String? postOffice,
           String? stateCode}) =>
@@ -191,7 +191,7 @@ class PostcodeItem extends DataClass implements Insertable<PostcodeItem> {
 }
 
 class PostcodeItemsCompanion extends UpdateCompanion<PostcodeItem> {
-  final Value<int> code;
+  final Value<String> code;
   final Value<String> areaName;
   final Value<String> postOffice;
   final Value<String> stateCode;
@@ -204,7 +204,7 @@ class PostcodeItemsCompanion extends UpdateCompanion<PostcodeItem> {
     this.rowid = const Value.absent(),
   });
   PostcodeItemsCompanion.insert({
-    required int code,
+    required String code,
     required String areaName,
     required String postOffice,
     required String stateCode,
@@ -214,7 +214,7 @@ class PostcodeItemsCompanion extends UpdateCompanion<PostcodeItem> {
         postOffice = Value(postOffice),
         stateCode = Value(stateCode);
   static Insertable<PostcodeItem> custom({
-    Expression<int>? code,
+    Expression<String>? code,
     Expression<String>? areaName,
     Expression<String>? postOffice,
     Expression<String>? stateCode,
@@ -230,7 +230,7 @@ class PostcodeItemsCompanion extends UpdateCompanion<PostcodeItem> {
   }
 
   PostcodeItemsCompanion copyWith(
-      {Value<int>? code,
+      {Value<String>? code,
       Value<String>? areaName,
       Value<String>? postOffice,
       Value<String>? stateCode,
@@ -248,7 +248,7 @@ class PostcodeItemsCompanion extends UpdateCompanion<PostcodeItem> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (code.present) {
-      map['postcode'] = Variable<int>(code.value);
+      map['postcode'] = Variable<String>(code.value);
     }
     if (areaName.present) {
       map['area_name'] = Variable<String>(areaName.value);
@@ -483,7 +483,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
 typedef $$PostcodeItemsTableCreateCompanionBuilder = PostcodeItemsCompanion
     Function({
-  required int code,
+  required String code,
   required String areaName,
   required String postOffice,
   required String stateCode,
@@ -491,7 +491,7 @@ typedef $$PostcodeItemsTableCreateCompanionBuilder = PostcodeItemsCompanion
 });
 typedef $$PostcodeItemsTableUpdateCompanionBuilder = PostcodeItemsCompanion
     Function({
-  Value<int> code,
+  Value<String> code,
   Value<String> areaName,
   Value<String> postOffice,
   Value<String> stateCode,
@@ -507,7 +507,7 @@ class $$PostcodeItemsTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<int> get code => $composableBuilder(
+  ColumnFilters<String> get code => $composableBuilder(
       column: $table.code, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get areaName => $composableBuilder(
@@ -529,7 +529,7 @@ class $$PostcodeItemsTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<int> get code => $composableBuilder(
+  ColumnOrderings<String> get code => $composableBuilder(
       column: $table.code, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get areaName => $composableBuilder(
@@ -551,7 +551,7 @@ class $$PostcodeItemsTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<int> get code =>
+  GeneratedColumn<String> get code =>
       $composableBuilder(column: $table.code, builder: (column) => column);
 
   GeneratedColumn<String> get areaName =>
@@ -590,7 +590,7 @@ class $$PostcodeItemsTableTableManager extends RootTableManager<
           createComputedFieldComposer: () =>
               $$PostcodeItemsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
-            Value<int> code = const Value.absent(),
+            Value<String> code = const Value.absent(),
             Value<String> areaName = const Value.absent(),
             Value<String> postOffice = const Value.absent(),
             Value<String> stateCode = const Value.absent(),
@@ -604,7 +604,7 @@ class $$PostcodeItemsTableTableManager extends RootTableManager<
             rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int code,
+            required String code,
             required String areaName,
             required String postOffice,
             required String stateCode,

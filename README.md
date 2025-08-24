@@ -11,4 +11,4 @@ View and search your postcode
 
 ## Sources
 
-https://github.com/atqnp/postcode-malaysia (Data from POS Malaysia)
+[MalaysiaPostcode.com](https://malaysiapostcode.com/)

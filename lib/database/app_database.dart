@@ -26,8 +26,7 @@ class AppDatabase extends _$AppDatabase {
 
   /// Search postcodes by postcode number
   Future<List<PostcodeItem>> searchPostcode(String searchQuery) {
-    return (select(postcodeItems)
-          ..where((t) => t.code.equals(int.parse(searchQuery))))
+    return (select(postcodeItems)..where((t) => t.code.like('$searchQuery%')))
         .get();
   }
 }
