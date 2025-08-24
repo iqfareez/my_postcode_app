@@ -6,6 +6,8 @@ import '../database/db.dart';
 import 'components/search_bar_widget.dart';
 import 'components/state_list_fragment.dart';
 
+enum UiState { ready, haveResults, noResults }
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -14,9 +16,9 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  final TextEditingController _searchController = TextEditingController();
   List<PostcodeItem> _results = [];
   bool _isLoading = false;
+  UiState _uiState = UiState.ready;
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +36,12 @@ class _Home extends State<Home> {
       body: Column(
         children: [
           SearchBarWidget(onSearch: (String searchText) {
-            _searchController.text = searchText;
-            _performSearch();
+            _performSearch(searchText);
           }),
           Expanded(
-            child: _searchController.text.isNotEmpty
-                ? _buildResultsList()
-                : StateListFragment(),
-          ),
+              child: _uiState == UiState.ready
+                  ? StateListFragment()
+                  : _buildResultsList()),
           Gap(25),
         ],
       ),
@@ -62,7 +62,7 @@ class _Home extends State<Home> {
       );
     }
 
-    if (_results.isEmpty && _searchController.text.isNotEmpty) {
+    if (_uiState == UiState.noResults) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -188,16 +188,22 @@ class _Home extends State<Home> {
     );
   }
 
-  void _performSearch() async {
-    if (_searchController.text.trim().isEmpty) return;
+  void _performSearch(String searchQuery) async {
+    if (searchQuery.trim().isEmpty) {
+      setState(() => _uiState = UiState.ready);
+      return;
+    }
 
-    final parsedQuery = int.tryParse(_searchController.text.trim());
+    final parsedQuery = int.tryParse(searchQuery);
     if (parsedQuery == null) return;
 
     setState(() => _isLoading = true);
 
     final db = DB.instance.database;
     _results = await db.searchPostcode(parsedQuery.toString());
-    setState(() => _isLoading = false);
+    setState(() {
+      _isLoading = false;
+      _uiState = _results.isNotEmpty ? UiState.haveResults : UiState.noResults;
+    });
   }
 }
