@@ -42,6 +42,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       ),
       child: TextField(
         controller: _searchController,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           hintText: 'Enter postcode (e.g., 50000)',
           prefixIcon: Icon(
