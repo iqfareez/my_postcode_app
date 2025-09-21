@@ -10,7 +10,9 @@ part 'app_database.g.dart';
   StateItems,
 ])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase(super.queryExecutor);
+  // https://drift.simonbinder.eu/platforms/web/#manual-code-sharing-between-native-apps-and-web
+  // ignore: use_super_parameters
+  AppDatabase(QueryExecutor e) : super(e);
 
   @override
   int get schemaVersion => 1;
