@@ -20,6 +20,7 @@ flutter run
 
 - https://play.google.com/store/apps/details?id=com.iqfareez.my_postcode_app
 - or download apk from [Releases](https://github.com/iqfareez/my_postcode_app/releases)
+- Try on Web: https://my-postcode.web.app/
 
 ## Sources
 
