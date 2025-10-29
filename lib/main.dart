@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme:
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 240, 17, 17)),
-        fontFamily: 'Roboto',
+        fontFamily: 'Be Vietnam Pro',
       ),
       home: Home(),
     );
