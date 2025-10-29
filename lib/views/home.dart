@@ -22,28 +22,31 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        title: Text(
-          'Malaysia Postcode',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: Colors.grey[50],
+        appBar: AppBar(
+          title: Text(
+            'Malaysia Postcode',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          elevation: 0,
+          centerTitle: true,
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          SearchBarWidget(onSearch: (String searchText) {
-            _performSearch(searchText);
-          }),
-          Expanded(
-              child: _uiState == UiState.ready
-                  ? StateListFragment()
-                  : _buildResultsList()),
-          Gap(25),
-        ],
+        body: Column(
+          children: [
+            SearchBarWidget(onSearch: (String searchText) {
+              _performSearch(searchText);
+            }),
+            Expanded(
+                child: _uiState == UiState.ready
+                    ? StateListFragment()
+                    : _buildResultsList()),
+            Gap(25),
+          ],
+        ),
       ),
     );
   }
