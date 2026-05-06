@@ -92,10 +92,10 @@ BEGIN
             VALUE "CompanyName", "com.iqfareez" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "my_postcode_app" "\0"
+            VALUE "InternalName", "My Postcode App" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.iqfareez. All rights reserved." "\0"
             VALUE "OriginalFilename", "my_postcode_app.exe" "\0"
-            VALUE "ProductName", "my_postcode_app" "\0"
+            VALUE "ProductName", "My Postcode App" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
