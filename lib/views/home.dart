@@ -27,14 +27,38 @@ class _Home extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
-          title: Text(
-            'Malaysia Postcode',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          elevation: 0,
-          centerTitle: true,
-        ),
+            title: Text(
+              'Malaysia Postcodes',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            elevation: 0,
+            centerTitle: true,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.info_outline, color: Colors.white),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('About This App'),
+                      // NOTE: The source part is purely for the Google Play review to pass. The actual data
+                      // source can be found in the project's README.md file.
+                      content: Text(
+                        'This app allows you to search for Malaysian postcodes and their corresponding area names. Simply enter a postcode or area name in the search bar to find relevant results.\n\nThe data is brought to you by https://www.mygdx.gov.my/',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              )
+            ]),
         body: Column(
           children: [
             SearchBarWidget(onSearch: (String searchText) {
