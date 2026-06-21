@@ -1,4 +1,5 @@
 [![style: lint](https://img.shields.io/badge/style-flutter__lint-4BC0F5.svg)](https://pub.dev/packages/flutter_lints)
+![Flutter](https://img.shields.io/badge/Flutter_3.44-%2302569B.svg?logo=Flutter&logoColor=white)
 
 <img width="1280" height="720" alt="GITHUB README" src="https://github.com/user-attachments/assets/bf2dc0bc-df86-468c-a6ec-2be7ef831191" />
 
